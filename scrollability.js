@@ -639,7 +639,7 @@ function generateCSSKeyframes(animator, keyframes, name, time, offset) {
 
     keyframes.forEach(function(keyframe) {
         var percent = (keyframe.time / time) * 100;
-        var frame = Math.floor(percent) + '% {'
+        var frame = Math.min(percent, 100) + '% {'
             + '-webkit-transform: ' + (keyframe.css || animator.update(keyframe.position+offset)) + ';'
             + '}';
         // D&&D(frame);
