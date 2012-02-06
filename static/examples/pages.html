@@ -42,7 +42,10 @@ html, body {
 
 </style> 
  
-<script type="text/javascript" src="/scrollability.min.js"></script>
+<script src="../../libs/requestAnimationFrame.js"></script>
+
+<script src="../../scrollability.js"></script>
+<script src="../../plugins/reportInertialScroll.js"></script>
 
 <script language="javascript">
 
@@ -82,6 +85,12 @@ addEventListener('DOMContentLoaded', function() {
 
         event.setSpacing(margin);
         event.setOffset(offset);
+    });
+
+    scrollable.addEventListener("scrollability-start", window.scrollability.reportInertialScroll);
+
+    scrollable.addEventListener("scrollability-inertia", function (e) {
+        console.log(e.translateX, e.translateY);
     });
 });
 

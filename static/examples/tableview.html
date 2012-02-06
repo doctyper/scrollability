@@ -10,9 +10,13 @@
 <style type="text/css">
 
 html {
-    overflow: hidden;
     background: #333;
     font-family: Helvetica;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
 }
 
 #container {
@@ -20,7 +24,7 @@ html {
     left: 0;
     top: 44px;
     bottom: 24px;
-    width: 100%;
+    width: 200%;
     background: #fff;
     overflow: hidden;
 /*    overflow: scroll;
@@ -77,9 +81,26 @@ html {
     );
 }*/
 
+.scrollability-scrollbar {
+    position: absolute;
+    top: 0;
+    right: 2px;
+    width: 7px;
+    height: 1px;
+    z-index: 9999;
+    opacity: 0;
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-box-sizing: border-box;
+    -webkit-transform-origin: top left;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAABCAYAAADuHp8EAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAC5JREFUeNpi/P//vyQDAwMjKytr2Z8/f9gYIICRAQH+Q/n/WVhYfgNBJ4gNEGAAhVUOGMTI0TwAAAAASUVORK5CYII=") no-repeat;
+    box-sizing: border-box;
+}
 </style>
 
-<script type="text/javascript" src="/scrollability.min.js"></script>
+<script src="../../libs/requestAnimationFrame.js"></script>
+
+<script src="../../scrollability.js"></script>
+<script src="../../plugins/reportInertialScroll.js"></script>
 
 <script language="javascript">
 
@@ -160,6 +181,18 @@ document.addEventListener('mousedown', function(event) {
     event.preventDefault();
 }, false);
 
+</script>
+
+<script>
+window.addEventListener("DOMContentLoaded", function () {
+    var scrollable = document.querySelector(".scrollable");
+
+    scrollable.addEventListener("scrollability-start", window.scrollability.reportInertialScroll);
+
+    scrollable.addEventListener("scrollability-inertia", function (e) {
+        // console.log(e.translateX, e.translateY);
+    });
+});
 </script>
     
 </head>
